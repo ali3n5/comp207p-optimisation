@@ -2,6 +2,7 @@
 .idea/encodings.xml
 .idea/misc.xml
 .idea/workspace.xml
+.idea/compiler.xml
 
 # Windows image file caches
 Thumbs.db

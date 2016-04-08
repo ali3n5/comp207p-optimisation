@@ -120,20 +120,44 @@ public class ConstantFolder
 				{
                     handle = handle.getNext();
                 }
-            }/*
-            else if (handle.getInstruction() instanceof IfInstruction)
-//                focus on ints for dynamic variable constant folding optimisation
+            }
+//            else if (handle.getInstruction() instanceof IfInstruction)
+////                focus on ints for dynamic variable constant folding optimisation
+//            {
+//                Number lastValue = getLastPush(instList, handle);
+//                if(compInt(instList, handle, lastValue))
+//                {
+//                    handleIf(instList, handle, lastValue);
+//                    InstructionHandle remove = handle;
+//                    handle = handle.getNext();
+//                    instDel(instList, remove);
+//                    instList.setPositions();
+//                }
+//            }
+			else if (handle.getInstruction() instanceof NOP)
+			{
+				InstructionHandle remove = handle;
+				handle = handle.getNext();
+				instDel(instList, remove);
+				instList.setPositions();
+			}
+            else if (handle.getInstruction() instanceof IINC)
             {
-                Number lastValue = getLastPush(instList, handle);
-                if(compInt(instList, handle, lastValue))
-                {
-                    handleIf(instList, handle, lastValue);
-                    InstructionHandle remove = handle;
-                    handle = handle.getNext();
-                    instDel(instList, remove);
-                    instList.setPositions();
+                int incVal = ((IINC) handle.getInstruction()).getIncrement();
+                int idx = ((IINC) handle.getInstruction()).getIndex();
+                instList.insert(handle, new BIPUSH((byte) incVal));
+                InstructionHandle incBp = handle.getPrev();
+                instList.insert(handle, new ILOAD(idx));
+                instList.insert(handle, new IADD());
+                instList.insert(handle, new ISTORE(idx));
+                try {
+                    instList.redirectBranches(handle, incBp);
+                    instList.delete(handle);
+                } catch (Exception e) {
+                    // do nothing
                 }
-            }*/
+                instList.setPositions();
+            }
 			else 
 			{
 				handle = handle.getNext();
@@ -423,6 +447,70 @@ public class ConstantFolder
 			instDel(instList,lastOp);
 			return num;
 		}
+        else if (lastOp.getInstruction() instanceof IUSHR)
+        {
+            Number[] num = lastValues(instList, lastOp);
+            if (num == null) {return null;}
+            return ((int) num[1] >>> (int) num[0]);
+        }
+        else if (lastOp.getInstruction() instanceof IXOR)
+        {
+            Number[] num = lastValues(instList, lastOp);
+            if (num == null) {return null;}
+            return ((int) num[1] ^ (int) num[0]);
+        }
+        else if (lastOp.getInstruction() instanceof LUSHR)
+        {
+            Number[] num = lastValues(instList, lastOp);
+            if (num == null) {return null;}
+            return ((long) num[1] >>> (long) num[0]);
+        }
+        else if (lastOp.getInstruction() instanceof LXOR)
+        {
+            Number[] num = lastValues(instList, lastOp);
+            if (num == null) {return null;}
+            return ((long) num[1] ^ (long) num[0]);
+        }
+        else if (lastOp.getInstruction() instanceof DCMPG)
+        {
+            Number[] number = lastValues(instList, lastOp);
+            if (number == null) {return null;}
+            if ((double) number[1] == (double) number[0]) {return 0;}
+            else if ((double) number[1] > (double) number[0]) {return 1;}
+            else {return -1;}
+        }
+        else if (lastOp.getInstruction() instanceof DCMPL)
+        {
+            Number[] number = lastValues(instList, lastOp);
+            if (number == null) {return null;}
+            if ((double) number[1] == (double) number[0]) {return 0;}
+            else if ((double) number[1] < (double) number[0]) {return 1;}
+            else {return -1;}
+        }
+        else if (lastOp.getInstruction() instanceof LCMP)
+        {
+            Number[] number = lastValues(instList, lastOp);
+            if (number == null) {return null;}
+            if ((double) number[1] == (double) number[0]) {return 0;}
+            else if ((double) number[1] > (double) number[0]) {return 1;}
+            else {return -1;}
+        }
+        else if (lastOp.getInstruction() instanceof FCMPG)
+        {
+            Number[] number = lastValues(instList, lastOp);
+            if (number == null) {return null;}
+            if ((float) number[1] == (float) number[0]) {return 0;}
+            else if ((float) number[1] > (float) number[0]) {return 1;}
+            else {return -1;}
+        }
+        else if (lastOp.getInstruction() instanceof FCMPL) {
+            Number[] number = lastValues(instList, lastOp);
+            if (number == null) {
+                return null;
+            }
+            if ((float) number[1] == (float) number[0]) {return 0;}
+            else if ((float) number[1] < (float) number[0]) {return 1;} else {return -1;}
+        }
 		else if (lastOp.getInstruction() instanceof ConversionInstruction)
 		{
 			Number num = getLastPush(instList,lastOp);
@@ -453,12 +541,18 @@ public class ConstantFolder
 		if (handle.getInstruction() instanceof ArithmeticInstruction ||
             handle.getInstruction() instanceof LocalVariableInstruction || 
 			handle.getInstruction() instanceof StackInstruction ||
+//            handle.getInstruction() instanceof BranchInstruction ||
 			handle.getInstruction() instanceof BIPUSH ||
             handle.getInstruction() instanceof SIPUSH || 
 			handle.getInstruction() instanceof LCONST ||
             handle.getInstruction() instanceof DCONST || 
 			handle.getInstruction() instanceof FCONST ||
-            handle.getInstruction() instanceof ICONST )
+            handle.getInstruction() instanceof ICONST ||
+            handle.getInstruction() instanceof DCMPG ||
+            handle.getInstruction() instanceof DCMPL ||
+            handle.getInstruction() instanceof FCMPG ||
+            handle.getInstruction() instanceof FCMPL ||
+            handle.getInstruction() instanceof LCMP)
 		{ 
             return true;
         }
