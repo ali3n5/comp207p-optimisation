@@ -76,9 +76,7 @@ public class ConstantFolder
 		{
 			//System.out.println(handle + "           " + method);
 			if (handle.getInstruction() instanceof ArithmeticInstruction)
-			{
-							
-
+            {
 				InstructionHandle toHandle = handle.getNext();
 				handle = handle.getNext();
                 Number lastValue = getLastPush(instList, toHandle);	
@@ -122,7 +120,20 @@ public class ConstantFolder
 				{
                     handle = handle.getNext();
                 }
-            } 
+            }
+            else if (handle.getInstruction() instanceof IfInstruction)
+//                focus on ints for dynamic variable constant folding optimisation
+            {
+                Number lastValue = getLastPush(instList, handle);
+                if(compInt(instList, handle, lastValue))
+                {
+                    handleIf(instList, handle, lastValue);
+                    InstructionHandle remove = handle;
+                    handle = handle.getNext();
+                    instDel(instList, remove);
+                    instList.setPositions();
+                }
+            }
 			else 
 			{
 				handle = handle.getNext();
@@ -139,7 +150,6 @@ public class ConstantFolder
         InstructionList newInstList = new InstructionList(newMethodCode.getCode());
         cgen.replaceMethod(method, newMethod);
 	}
-
 	
 	private Number getLastPush (InstructionList instList, InstructionHandle handle)
 	{
@@ -620,6 +630,33 @@ public class ConstantFolder
         return;
     }
 
+    private boolean compInt(InstructionList instList, InstructionHandle originalHandle, Number lastValue)
+    {
+        if (lastValue == null)
+            return false;
+        else if (originalHandle.getInstruction() instanceof IF_ICMPEQ
+                || originalHandle.getInstruction() instanceof IF_ICMGPE
+                || originalHandle.getInstruction() instanceof IF_ICMPGT
+                || originalHandle.getInstruction() instanceof IF_ICMPLE
+                || originalHandle.getInstruction() instanceof IF_ICMPLT)
+            // ignore negation
+            return true;
+        else
+            return false;
+    }
+
+    private void handleIf(InstructionList instList, InstructionHandle originalHandle, Number lastValue)
+    {
+        if (lastValue == null)
+        {
+            return;
+        }
+        int num = (int) lastValue;
+        if(originalHandle.getInstruction() instanceof IF_CMPGE)
+        {
+//            do something about it
+        }
+    }
 	
 	public void write(String optimisedFilePath)
 	{
