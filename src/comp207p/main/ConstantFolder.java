@@ -635,7 +635,7 @@ public class ConstantFolder
         if (lastValue == null)
             return false;
         else if (originalHandle.getInstruction() instanceof IF_ICMPEQ
-                || originalHandle.getInstruction() instanceof IF_ICMGPE
+                || originalHandle.getInstruction() instanceof IFGE
                 || originalHandle.getInstruction() instanceof IF_ICMPGT
                 || originalHandle.getInstruction() instanceof IF_ICMPLE
                 || originalHandle.getInstruction() instanceof IF_ICMPLT)
@@ -652,9 +652,30 @@ public class ConstantFolder
             return;
         }
         int num = (int) lastValue;
-        if(originalHandle.getInstruction() instanceof IF_CMPGE)
+        if(originalHandle.getInstruction() instanceof IFGE)
         {
 //            do something about it
+            int index = ((IFGE) originalHandle.getInstruction()).getIndex();
+            InstructionHandle handle = originalHandle.getNext();
+            int constIndex = CPGen.addInteger((int) num);
+            while (handle != null && !(handle.getInstruction() instanceof IFGE && ((IFGE) originalHandle.getInstruction()).getIndex() == index && originalHandle.getInstruction().getOpcode() == handle.getInstruction().getOpcode())) {
+
+                if (handle.getInstruction() instanceof IFGE && ((IFGE) handle.getInstruction()).getIndex() == index) {
+
+                    instList.insert(handle, new LDC(constIndex));
+                    instList.setPositions();
+
+                    InstructionHandle toDelete = handle;
+                    handle = handle.getNext();
+
+                    instDel(instList,toDelete);
+                    instList.setPositions();
+
+                } else {
+                    handle = handle.getNext();
+                }
+            }
+            return;
         }
     }
 	
