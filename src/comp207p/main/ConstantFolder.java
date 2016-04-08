@@ -461,14 +461,85 @@ public class ConstantFolder
 			instDel(instList,lastOp);
 			return num;
 		}
+        else if (lastOp.getInstruction() instanceof ConversionInstruction) {
+            if (lastOp.getInstruction() instanceof I2C) {
+                return null;
+            }
+            Number firstNumber = getLastPush(instList, lastOp);
+            if (firstNumber == null) {
+                return null;
+            }
+            Number convertedNum = changeNum(lastOp, firstNumber);
+            instDel(instList, lastOp);
+            return convertedNum;
+        }
 		return null;
 	}
+
+    private Number changeNum(InstructionHandle lastOp, Number firstNumber) {
+
+        if (lastOp.getInstruction() instanceof I2D) {
+            return (double)((int) firstNumber);
+        }
+        else if (lastOp.getInstruction() instanceof D2F) {
+            return (float)((double) firstNumber);
+        }
+        else if (lastOp.getInstruction() instanceof D2I) {
+            return (int)((double) firstNumber);
+        }
+        else if (lastOp.getInstruction() instanceof D2L) {
+            return (long)((double) firstNumber);
+        }
+        else if (lastOp.getInstruction() instanceof F2D) {
+            return (double)((float) firstNumber);
+        }
+        else if (lastOp.getInstruction() instanceof F2I) {
+            return (int)((float) firstNumber);
+        }
+        else if (lastOp.getInstruction() instanceof F2L) {
+            return (long)((float) firstNumber);
+        }
+        else if (lastOp.getInstruction() instanceof I2B) {
+            return (byte)((int) firstNumber);
+        }
+        else if (lastOp.getInstruction() instanceof I2D) {
+            return (double)((int) firstNumber);
+        }
+        else if (lastOp.getInstruction() instanceof I2F) {
+            return (float)((int) firstNumber);
+        }
+        else if (lastOp.getInstruction() instanceof I2L) {
+            return (long)((int) firstNumber);
+        }
+        else if (lastOp.getInstruction() instanceof I2S) {
+            return (short)((int) firstNumber);
+        }
+        else if (lastOp.getInstruction() instanceof L2D) {
+            return (double)((long) firstNumber);
+        }
+        else if (lastOp.getInstruction() instanceof L2F) {
+            return (float)((long) firstNumber);
+        }
+        else if (lastOp.getInstruction() instanceof L2I) {
+            return (int)((long) firstNumber);
+        }
+        else if (lastOp.getInstruction() instanceof L2F) {
+            return (float)((long) firstNumber);
+        }
+        return null;
+    }
 
 	private Boolean stackChangingOp(InstructionHandle handle)
 	{
 		if (handle.getInstruction() instanceof ArithmeticInstruction ||
             handle.getInstruction() instanceof LocalVariableInstruction ||
-			handle.getInstruction() instanceof StackInstruction)
+			handle.getInstruction() instanceof StackInstruction ||
+            handle.getInstruction() instanceof BIPUSH ||
+            handle.getInstruction() instanceof SIPUSH || handle.getInstruction() instanceof LCONST ||
+            handle.getInstruction() instanceof DCONST || handle.getInstruction() instanceof FCONST ||
+            handle.getInstruction() instanceof ICONST || handle.getInstruction() instanceof DCMPG ||
+            handle.getInstruction() instanceof DCMPL || handle.getInstruction() instanceof FCMPG ||
+            handle.getInstruction() instanceof FCMPL || handle.getInstruction() instanceof LCMP)
 		{
             return true;
         }
