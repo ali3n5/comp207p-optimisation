@@ -1,0 +1,135 @@
+Testsuite: comp207p.target.ConstantVariableFoldingTest
+Tests run: 4, Failures: 0, Errors: 4, Skipped: 0, Time elapsed: 0.039 sec
+
+Testcase: testMethodThree took 0.004 sec
+	Caused an ERROR
+Bad local variable type
+Exception Details:
+  Location:
+    comp207p/target/ConstantVariableFolding.methodThree()Z @5: iload_2
+  Reason:
+    Type top (current frame, locals[2]) is not assignable to integer
+  Current Frame:
+    bci: @5
+    flags: { }
+    locals: { 'comp207p/target/ConstantVariableFolding', integer }
+    stack: { integer }
+  Bytecode:
+    0x0000000: 1130 393c 1b1c a400 0704 a700 0403 ac  
+
+java.lang.VerifyError: Bad local variable type
+Exception Details:
+  Location:
+    comp207p/target/ConstantVariableFolding.methodThree()Z @5: iload_2
+  Reason:
+    Type top (current frame, locals[2]) is not assignable to integer
+  Current Frame:
+    bci: @5
+    flags: { }
+    locals: { 'comp207p/target/ConstantVariableFolding', integer }
+    stack: { integer }
+  Bytecode:
+    0x0000000: 1130 393c 1b1c a400 0704 a700 0403 ac  
+
+	at comp207p.target.ConstantVariableFoldingTest.<init>(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:422)
+
+Testcase: testMethodFour took 0 sec
+	Caused an ERROR
+Bad local variable type
+Exception Details:
+  Location:
+    comp207p/target/ConstantVariableFolding.methodThree()Z @5: iload_2
+  Reason:
+    Type top (current frame, locals[2]) is not assignable to integer
+  Current Frame:
+    bci: @5
+    flags: { }
+    locals: { 'comp207p/target/ConstantVariableFolding', integer }
+    stack: { integer }
+  Bytecode:
+    0x0000000: 1130 393c 1b1c a400 0704 a700 0403 ac  
+
+java.lang.VerifyError: Bad local variable type
+Exception Details:
+  Location:
+    comp207p/target/ConstantVariableFolding.methodThree()Z @5: iload_2
+  Reason:
+    Type top (current frame, locals[2]) is not assignable to integer
+  Current Frame:
+    bci: @5
+    flags: { }
+    locals: { 'comp207p/target/ConstantVariableFolding', integer }
+    stack: { integer }
+  Bytecode:
+    0x0000000: 1130 393c 1b1c a400 0704 a700 0403 ac  
+
+	at comp207p.target.ConstantVariableFoldingTest.<init>(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:422)
+
+Testcase: testMethodOne took 0 sec
+	Caused an ERROR
+Bad local variable type
+Exception Details:
+  Location:
+    comp207p/target/ConstantVariableFolding.methodThree()Z @5: iload_2
+  Reason:
+    Type top (current frame, locals[2]) is not assignable to integer
+  Current Frame:
+    bci: @5
+    flags: { }
+    locals: { 'comp207p/target/ConstantVariableFolding', integer }
+    stack: { integer }
+  Bytecode:
+    0x0000000: 1130 393c 1b1c a400 0704 a700 0403 ac  
+
+java.lang.VerifyError: Bad local variable type
+Exception Details:
+  Location:
+    comp207p/target/ConstantVariableFolding.methodThree()Z @5: iload_2
+  Reason:
+    Type top (current frame, locals[2]) is not assignable to integer
+  Current Frame:
+    bci: @5
+    flags: { }
+    locals: { 'comp207p/target/ConstantVariableFolding', integer }
+    stack: { integer }
+  Bytecode:
+    0x0000000: 1130 393c 1b1c a400 0704 a700 0403 ac  
+
+	at comp207p.target.ConstantVariableFoldingTest.<init>(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:422)
+
+Testcase: testMethodTwo took 0 sec
+	Caused an ERROR
+Bad local variable type
+Exception Details:
+  Location:
+    comp207p/target/ConstantVariableFolding.methodThree()Z @5: iload_2
+  Reason:
+    Type top (current frame, locals[2]) is not assignable to integer
+  Current Frame:
+    bci: @5
+    flags: { }
+    locals: { 'comp207p/target/ConstantVariableFolding', integer }
+    stack: { integer }
+  Bytecode:
+    0x0000000: 1130 393c 1b1c a400 0704 a700 0403 ac  
+
+java.lang.VerifyError: Bad local variable type
+Exception Details:
+  Location:
+    comp207p/target/ConstantVariableFolding.methodThree()Z @5: iload_2
+  Reason:
+    Type top (current frame, locals[2]) is not assignable to integer
+  Current Frame:
+    bci: @5
+    flags: { }
+    locals: { 'comp207p/target/ConstantVariableFolding', integer }
+    stack: { integer }
+  Bytecode:
+    0x0000000: 1130 393c 1b1c a400 0704 a700 0403 ac  
+
+	at comp207p.target.ConstantVariableFoldingTest.<init>(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:422)
+
