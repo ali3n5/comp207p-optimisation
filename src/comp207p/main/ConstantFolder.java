@@ -541,7 +541,7 @@ public class ConstantFolder
 		if (handle.getInstruction() instanceof ArithmeticInstruction ||
             handle.getInstruction() instanceof LocalVariableInstruction || 
 			handle.getInstruction() instanceof StackInstruction ||
-//            handle.getInstruction() instanceof BranchInstruction ||
+             handle.getInstruction() instanceof BranchInstruction ||
 			handle.getInstruction() instanceof BIPUSH ||
             handle.getInstruction() instanceof SIPUSH || 
 			handle.getInstruction() instanceof LCONST ||
