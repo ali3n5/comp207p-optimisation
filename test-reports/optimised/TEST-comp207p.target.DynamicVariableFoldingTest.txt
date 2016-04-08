@@ -1,0 +1,128 @@
+Testsuite: comp207p.target.DynamicVariableFoldingTest
+Tests run: 5, Failures: 0, Errors: 5, Skipped: 0, Time elapsed: 0.036 sec
+
+Testcase: testMethodThree took 0.003 sec
+	Caused an ERROR
+Expecting a stackmap frame at branch target 14
+Exception Details:
+  Location:
+    comp207p/target/DynamicVariableFolding.methodTwo()Z @7: if_icmpge
+  Reason:
+    Expected stackmap frame at this location.
+  Bytecode:
+    0x0000000: b200 0312 3312 02a2 0007 04a7 0004 03b6
+    0x0000010: 0004 1233 1234 a400 0704 a700 0403 ac  
+
+java.lang.VerifyError: Expecting a stackmap frame at branch target 14
+Exception Details:
+  Location:
+    comp207p/target/DynamicVariableFolding.methodTwo()Z @7: if_icmpge
+  Reason:
+    Expected stackmap frame at this location.
+  Bytecode:
+    0x0000000: b200 0312 3312 02a2 0007 04a7 0004 03b6
+    0x0000010: 0004 1233 1234 a400 0704 a700 0403 ac  
+
+	at comp207p.target.DynamicVariableFoldingTest.<init>(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:422)
+
+Testcase: testMethodFour took 0.001 sec
+	Caused an ERROR
+Expecting a stackmap frame at branch target 14
+Exception Details:
+  Location:
+    comp207p/target/DynamicVariableFolding.methodTwo()Z @7: if_icmpge
+  Reason:
+    Expected stackmap frame at this location.
+  Bytecode:
+    0x0000000: b200 0312 3312 02a2 0007 04a7 0004 03b6
+    0x0000010: 0004 1233 1234 a400 0704 a700 0403 ac  
+
+java.lang.VerifyError: Expecting a stackmap frame at branch target 14
+Exception Details:
+  Location:
+    comp207p/target/DynamicVariableFolding.methodTwo()Z @7: if_icmpge
+  Reason:
+    Expected stackmap frame at this location.
+  Bytecode:
+    0x0000000: b200 0312 3312 02a2 0007 04a7 0004 03b6
+    0x0000010: 0004 1233 1234 a400 0704 a700 0403 ac  
+
+	at comp207p.target.DynamicVariableFoldingTest.<init>(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:422)
+
+Testcase: testMethodOne took 0 sec
+	Caused an ERROR
+Expecting a stackmap frame at branch target 14
+Exception Details:
+  Location:
+    comp207p/target/DynamicVariableFolding.methodTwo()Z @7: if_icmpge
+  Reason:
+    Expected stackmap frame at this location.
+  Bytecode:
+    0x0000000: b200 0312 3312 02a2 0007 04a7 0004 03b6
+    0x0000010: 0004 1233 1234 a400 0704 a700 0403 ac  
+
+java.lang.VerifyError: Expecting a stackmap frame at branch target 14
+Exception Details:
+  Location:
+    comp207p/target/DynamicVariableFolding.methodTwo()Z @7: if_icmpge
+  Reason:
+    Expected stackmap frame at this location.
+  Bytecode:
+    0x0000000: b200 0312 3312 02a2 0007 04a7 0004 03b6
+    0x0000010: 0004 1233 1234 a400 0704 a700 0403 ac  
+
+	at comp207p.target.DynamicVariableFoldingTest.<init>(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:422)
+
+Testcase: testMethodTwoReturn took 0 sec
+	Caused an ERROR
+Expecting a stackmap frame at branch target 14
+Exception Details:
+  Location:
+    comp207p/target/DynamicVariableFolding.methodTwo()Z @7: if_icmpge
+  Reason:
+    Expected stackmap frame at this location.
+  Bytecode:
+    0x0000000: b200 0312 3312 02a2 0007 04a7 0004 03b6
+    0x0000010: 0004 1233 1234 a400 0704 a700 0403 ac  
+
+java.lang.VerifyError: Expecting a stackmap frame at branch target 14
+Exception Details:
+  Location:
+    comp207p/target/DynamicVariableFolding.methodTwo()Z @7: if_icmpge
+  Reason:
+    Expected stackmap frame at this location.
+  Bytecode:
+    0x0000000: b200 0312 3312 02a2 0007 04a7 0004 03b6
+    0x0000010: 0004 1233 1234 a400 0704 a700 0403 ac  
+
+	at comp207p.target.DynamicVariableFoldingTest.<init>(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:422)
+
+Testcase: testMethodTwoOut took 0 sec
+	Caused an ERROR
+Expecting a stackmap frame at branch target 14
+Exception Details:
+  Location:
+    comp207p/target/DynamicVariableFolding.methodTwo()Z @7: if_icmpge
+  Reason:
+    Expected stackmap frame at this location.
+  Bytecode:
+    0x0000000: b200 0312 3312 02a2 0007 04a7 0004 03b6
+    0x0000010: 0004 1233 1234 a400 0704 a700 0403 ac  
+
+java.lang.VerifyError: Expecting a stackmap frame at branch target 14
+Exception Details:
+  Location:
+    comp207p/target/DynamicVariableFolding.methodTwo()Z @7: if_icmpge
+  Reason:
+    Expected stackmap frame at this location.
+  Bytecode:
+    0x0000000: b200 0312 3312 02a2 0007 04a7 0004 03b6
+    0x0000010: 0004 1233 1234 a400 0704 a700 0403 ac  
+
+	at comp207p.target.DynamicVariableFoldingTest.<init>(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:422)
+
