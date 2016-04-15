@@ -141,31 +141,13 @@ public class ConstantFolder
 				instDel(instList, remove);
 				instList.setPositions();
 			}
-            else if (handle.getInstruction() instanceof IINC)
-            {
-                int incVal = ((IINC) handle.getInstruction()).getIncrement();
-                int idx = ((IINC) handle.getInstruction()).getIndex();
-                instList.insert(handle, new BIPUSH((byte) incVal));
-                InstructionHandle incBp = handle.getPrev();
-                instList.insert(handle, new ILOAD(idx));
-                instList.insert(handle, new IADD());
-                instList.insert(handle, new ISTORE(idx));
-                try {
-                    instList.redirectBranches(handle, incBp);
-                    instList.delete(handle);
-                } catch (Exception e) {
-                    // do nothing
-                }
-                instList.setPositions();
-            }
 			else 
 			{
 				handle = handle.getNext();
 			}
 			instList.setPositions();
 		}
-		
-		//Possibly delete
+
 		instList.setPositions(true);
         methGen.setMaxStack();
         methGen.setMaxLocals();
