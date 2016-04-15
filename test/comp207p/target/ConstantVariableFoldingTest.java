@@ -11,6 +11,7 @@ public class ConstantVariableFoldingTest {
 
     ConstantVariableFolding cvf = new ConstantVariableFolding();
 
+
     @Test
     public void testMethodOne(){
         assertEquals(3650, cvf.methodOne());
